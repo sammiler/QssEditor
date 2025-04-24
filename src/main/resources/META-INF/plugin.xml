@@ -1,0 +1,24 @@
+<idea-plugin>
+    <id>com.example.qss</id>
+    <name>QSS Support</name>
+    <vendor>YourName</vendor>
+    <description>Provides support for Qt Style Sheets (QSS) files.</description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="QSS File" implementationClass="com.example.qss.QSSFileType"
+                  fieldName="INSTANCE" language="QSS" extensions="qss"/>
+        <lang.parserDefinition language="QSS"
+                               implementationClass="com.example.qss.parser.QSSParserDefinition"/>
+        <lang.commenter language="QSS" implementationClass="com.example.qss.QSSCommenter"/>
+        <completion.contributor language="QSS"
+                                implementationClass="com.example.qss.QSSCompletionContributor"/>
+        <lang.syntaxHighlighterFactory language="QSS"
+        implementationClass="com.example.qss.highlighting.QSSSyntaxHighlighterFactory"/>
+        <annotator language="QSS"
+        implementationClass="com.example.qss.highlighting.QSSAnnotator"/>
+        <lang.braceMatcher language="QSS" implementationClass="com.example.qss.QSSBraceMatcher"/>
+        <typedHandler implementation="com.example.qss.QSSColonTypedHandler"/>
+    </extensions>
+</idea-plugin>

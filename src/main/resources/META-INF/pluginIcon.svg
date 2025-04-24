@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="40" width="40" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 473.654 473.654" xml:space="preserve">
+<circle style="fill:#D7DABA;" cx="236.827" cy="236.827" r="236.827"/>
+    <path style="fill:#368BCA;" d="M144.31,93.732c-8.818,0-15.972,7.154-15.972,15.975v255.604c0,8.822,7.154,15.972,15.972,15.972
+	h183.718c8.822,0,15.972-7.15,15.972-15.972V167.712l-77.002-73.98H144.31z"/>
+    <g>
+	<path style="fill:#0E81C2;" d="M344.003,167.716h-61.03c-8.822,0-15.972-7.15-15.972-15.972V93.732L344.003,167.716z"/>
+        <path style="fill:#0E81C2;" d="M263.812,271.613c0,10.183-8.253,18.436-18.432,18.436H110.811
+		c-10.183,0-18.432-8.253-18.432-18.436v-56.318c0-10.183,8.25-18.436,18.432-18.436H245.38c10.179,0,18.432,8.253,18.432,18.436
+		V271.613z"/>
+</g>
+    <text x="200" y="250" font-size="50" fill="#FFFFFF" font-family="sans-serif" text-anchor="middle">QSS</text>
+</svg>

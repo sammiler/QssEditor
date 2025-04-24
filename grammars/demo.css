@@ -1,0 +1,32 @@
+/* 块注释（对应 DEFAULT_BLOCK_COMMENT） */
+body {
+    /* 行注释（对应 DEFAULT_LINE_COMMENT） */
+    background-color: white; /* 标识符和值（对应 IDENTIFIER, STRING） */
+    font-size: 16px; /* 数字（对应 NUMBER） */
+}
+
+/* 类选择器（对应 CLASS_NAME 或 IDENTIFIER） */
+.container {
+    display: flex; /* 关键字（对应 KEYWORD） */
+    margin: 10px; /* 数字（对应 NUMBER） */
+    color: #333; /* 十六进制颜色值（对应 STRING 或 NUMBER） */
+}
+
+/* ID 选择器（对应 IDENTIFIER） */
+#myId {
+    border: 1px solid black; /* 关键字、数字、标识符（对应 KEYWORD, NUMBER, IDENTIFIER） */
+}
+
+/* 伪类（对应 KEYWORD 或 IDENTIFIER） */
+.container:hover {
+    background: rgba(45, 32, 94, 0.1); /* 函数调用和数字（对应 FUNCTION_CALL, NUMBER） */
+}
+
+/* 媒体查询（对应 KEYWORD） */
+@media screen and (max-width: 600px) {
+    .container {
+        flex-direction: column; /* 关键字（对应 KEYWORD） */
+    }
+}
+
+/* 属性（对应 MARK

@@ -1,0 +1,114 @@
+{
+  parserClass="com.example.qss.parser.QSSParser"
+  psiClassPrefix="QSS"
+  psiPackage="com.example.qss.psi"
+  psiImplClassSuffix="Impl"
+  psiImplPackage="com.example.qss.psi.impl"
+  implements = "com.example.qss.psi.QSSPsiElement"
+
+  elementTypeHolderClass = "com.example.qss.psi.QSSTypes"
+  elementTypeClass = "com.example.qss.psi.QSSElementType"
+  tokenTypeClass = "com.example.qss.psi.QSSTokenType"
+
+  psiImplUtilClass = "com.example.qss.psi.QSSPsiImplUtil"
+
+  tokens = [
+    LBRACE = '{'
+    RBRACE = '}'
+    SEMICOLON = ';'
+    COLON = ':'
+    HASH = '#'
+    DOUBLE_COLON = '::'
+    COMMA = ','
+    GT = '>'
+    DOT = '.'
+    ASTERISK = '*'
+    LBRACKET = '['
+    RBRACKET = ']'
+    LPAREN = '('
+    RPAREN = ')'
+    EQUALS = '='
+    TILDE_EQUALS = '~='
+    PIPE_EQUALS = '|='
+    PRIORITY_MARKER = '!'
+  ]
+}
+
+stylesheet ::= (top_level_item)* { pin = 1 }
+private top_level_item ::= rule | BLOCK_COMMENT
+
+// Rule definition: selector { property_list }
+// Explicit brace_block to ensure LBRACE and RBRACE are QSSRule children.
+// RBRACE optional for incomplete inputs.
+rule ::= selector_list brace_block { pin = 1 recoverWhile = rule_recover }
+private brace_block ::= LBRACE property_list RBRACE { pin = 1 }
+
+// Recovery for 'rule' - recover at selector boundaries or EOF
+private rule_recover ::= !(IDENTIFIER | ASTERISK | BLOCK_COMMENT  |  COLON | SEMICOLON | EOF) ANY
+
+
+// 顶层规则：一个或多个用逗号分隔的选择器
+selector_list ::= selector (COMMA selector)* { pin = 1 }
+// --- Selector rules ---
+selector ::= simple_selector ( selector_combinator_part )* { pin = 1 }
+private selector_combinator_part ::= (combinator)? simple_selector
+combinator ::= GT
+simple_selector ::= base_selector (hash_selector)? (class_selector)* (pseudo_element | pseudo_state | attribute_selector)* { pin = 1 }
+base_selector ::= widget_selector | universal_selector
+universal_selector ::= ASTERISK
+widget_selector ::= IDENTIFIER
+hash_selector ::= HASH_ID
+class_selector ::= DOT IDENTIFIER
+pseudo_element ::= DOUBLE_COLON IDENTIFIER
+pseudo_state ::= COLON (PRIORITY_MARKER)? IDENTIFIER
+attribute_selector ::= LBRACKET attribute_selector_content RBRACKET { pin = 1 }
+private attribute_selector_content ::= IDENTIFIER (attribute_operator attribute_value_in_selector)?
+attribute_operator ::= EQUALS | TILDE_EQUALS | PIPE_EQUALS
+private attribute_value_in_selector ::= IDENTIFIER | STRING
+// --- End of Selector rules ---
+
+// property_list and Property rules
+property_list ::= property_list_content* { pin = 1 recoverWhile = property_list_recover }
+
+// Simplified recovery to handle errors and EOF
+private property_list_recover ::= !( EOF) ANY
+
+// Reordered property_list_content to prioritize specific matches
+private property_list_content ::=  property | partial_property | unexpected_list_item | error_element
+
+// Partial property to capture identifiers without COLON
+private partial_property ::= property_name { pin = 1 }
+
+// Restrict unexpected_list_item to specific non-empty tokens, prevent empty input
+unexpected_list_item ::= !(SEMICOLON | RBRACE | IDENTIFIER | QPROPERTY_IDENTIFIER) (NUMBER | STRING | HASH_ID | URL | ASTERISK | LBRACKET | LPAREN) { pin = 1 }
+
+// Capture unmatched tokens, exclude IDENTIFIER to prioritize partial_property
+private error_element ::= !( SEMICOLON | RBRACE | COLON | LBRACE | QPROPERTY_IDENTIFIER | IDENTIFIER) ANY { pin = 1 }
+
+// Property definition, SEMICOLON optional
+property ::= (property_name COLON)? value_list  SEMICOLON
+
+property_name ::=  QPROPERTY_IDENTIFIER | IDENTIFIER
+
+// Value list and Value rules
+value_list ::= value+ (COMMA value)*  (LPAREN argument_list? RPAREN)?    {pin =1   recoverWhile = value_list_recover }
+
+
+
+// Enhanced recovery for single identifiers like 'active'
+private value_list_recover ::= !(COMMA | SEMICOLON | RPAREN | EOF | COLON ) ANY
+
+value ::=  simple_value  { recoverWhile = value_recover }
+
+private value_recover ::= !(COMMA | SEMICOLON  | RPAREN | EOF | COLON) ANY
+
+simple_value ::=   NUMBER | STRING | HASH_ID | URL | RGB_COLOR | LENGTH | IDENTIFIER
+
+
+argument_list ::= argument (COMMA argument)* { pin = 1 recoverWhile = argument_list_recover }
+
+private argument_list_recover ::= !(COMMA | RPAREN | SEMICOLON | LBRACE  | EOF | COLON) ANY
+
+argument ::=  simple_value  (COLON simple_value+ )?        { recoverWhile = argument_recover }
+
+private argument_recover ::= !(COMMA | RPAREN | EOF | COLON | SEMICOLON) ANY
