@@ -1,24 +1,102 @@
 <idea-plugin>
-    <id>com.example.qss</id>
-    <name>QSS Support</name>
-    <vendor>YourName</vendor>
-    <description>Provides support for Qt Style Sheets (QSS) files.</description>
+    <!-- !!! IMPORTANT: Change the ID to something unique for your plugin !!! -->
+    <id>qsseditor</id>
 
+    <!-- Use the name from your README -->
+    <name>QssSupport</name>
+
+    <!-- Update with your actual name or organization -->
+    <vendor>sammiler</vendor>
+
+    <!-- Add the version from your README -->
+    <version>1.0.0</version>
+
+    <!-- Specify the supported IDE versions. Check compatibility. -->
+    <!-- Example:
+    <idea-version since-build="231" until-build="241.*"/>
+    Adjust based on the IntelliJ version used for development in build.gradle.kts -->
+
+    <!-- Plugin Description - Translated and summarized from README -->
+    <description><![CDATA[
+        <h2>QssEditor - Enhancing Qt Style Sheet Development in IntelliJ IDEA</h2>
+
+        <p>
+            QssEditor is an IntelliJ IDEA plugin designed to improve the development experience for <strong>Qt Style Sheet (QSS)</strong> files.
+            QSS is Qt's powerful mechanism for customizing the appearance of Qt Widgets, similar to CSS for HTML.
+        </p>
+        <p>
+            This plugin aims to bring common features found in IDE support for mainstream languages to QSS development within the IntelliJ ecosystem,
+            making it faster, easier, and less error-prone to work with QSS files in your favorite IDE.
+        </p>
+
+        <h3>Features ✨</h3>
+        <ul>
+            <li><strong>Syntax Highlighting:</strong> Improves readability by color-coding selectors, properties, values, and comments.</li>
+            <li><strong>Code Completion (Basic):</strong>
+                <ul>
+                    <li>Suggests QSS selectors (e.g., <code>QPushButton</code>, <code>QLabel</code>).</li>
+                    <li>Suggests pseudo-states (e.g., <code>:hover</code>, <code>:pressed</code>).</li>
+                    <li>Suggests QSS properties (e.g., <code>color</code>, <code>background-color</code>).</li>
+                    <li>Suggests common values/keywords for properties (e.g., color names, <code>transparent</code>).</li>
+                </ul>
+            </li>
+            <li><strong>Error Checking / Inspections (Basic):</strong>
+                <ul>
+                    <li>Highlights syntax errors.</li>
+                    <li>Warns about potentially unknown properties or invalid values.</li>
+                    <li>Identifies duplicate properties within the same rule block.</li>
+                </ul>
+            </li>
+            <li><em>(Planned/Optional) Basic Code Formatting</em></li>
+            <li><em>(Planned/Optional) Color Preview in Gutter</em></li>
+            <li><em>(Planned/Optional) Code Navigation</em></li>
+        </ul>
+        <br/>
+        <p>For source code, contribution guidelines, and detailed installation instructions, please visit the <a href="https://github.com/sammiler/QssEditor">GitHub repository</a>.</p> <!-- TODO: Update link if necessary -->
+    ]]></description>
+
+    <!-- Change Notes - Describe changes in this version -->
+    <change-notes><![CDATA[
+        <h3>Version 1.0.0</h3>
+        <ul>
+            <li>Initial release.</li>
+            <li>Provides basic syntax highlighting, code completion, and error checking for QSS files.</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- Dependencies -->
     <depends>com.intellij.modules.platform</depends>
 
+    <!-- Extension Points -->
     <extensions defaultExtensionNs="com.intellij">
+        <!-- File Type Registration -->
         <fileType name="QSS File" implementationClass="com.example.qss.QSSFileType"
                   fieldName="INSTANCE" language="QSS" extensions="qss"/>
+        <!-- Parser Definition -->
         <lang.parserDefinition language="QSS"
                                implementationClass="com.example.qss.parser.QSSParserDefinition"/>
+        <!-- Commenter -->
         <lang.commenter language="QSS" implementationClass="com.example.qss.QSSCommenter"/>
+        <!-- Code Completion -->
         <completion.contributor language="QSS"
                                 implementationClass="com.example.qss.QSSCompletionContributor"/>
+        <!-- Syntax Highlighter -->
         <lang.syntaxHighlighterFactory language="QSS"
-        implementationClass="com.example.qss.highlighting.QSSSyntaxHighlighterFactory"/>
+                                       implementationClass="com.example.qss.highlighting.QSSSyntaxHighlighterFactory"/>
+        <!-- Annotator for Error Highlighting/Inspections -->
         <annotator language="QSS"
-        implementationClass="com.example.qss.highlighting.QSSAnnotator"/>
+                   implementationClass="com.example.qss.highlighting.QSSAnnotator"/>
+        <!-- Brace Matching -->
         <lang.braceMatcher language="QSS" implementationClass="com.example.qss.QSSBraceMatcher"/>
+        <!-- Typed Handler (e.g., for auto-inserting colon) -->
         <typedHandler implementation="com.example.qss.QSSColonTypedHandler"/>
+
+        <!-- Add other extensions here as needed -->
+
     </extensions>
+
+    <!-- Plugin Actions (if any, e.g., for menu items) -->
+    <!-- <actions> -->
+    <!-- </actions> -->
+
 </idea-plugin>

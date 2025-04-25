@@ -34,7 +34,7 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
-
+.intellijPlatform/
 ### VS Code ###
 .vscode/
 gen
