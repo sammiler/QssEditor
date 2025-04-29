@@ -9,7 +9,7 @@
     <vendor>sammiler</vendor>
 
     <!-- Add the version from your README -->
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 
     <!-- Specify the supported IDE versions. Check compatibility. -->
     <!-- Example:
@@ -56,13 +56,23 @@
     ]]></description>
 
     <!-- Change Notes - Describe changes in this version -->
-    <change-notes><![CDATA[
+    <change-notes>
+        <![CDATA[
+        <h3>Version 1.1.0</h3>
+        <ul>
+            <li><b>Enhanced Code Completion:</b></li>
+            <li>Automatically inserts '<code>: </code>' (colon and space) after completing a QSS property name (e.g., completing 'background-color' results in 'background-color: ').</li>
+            <li>Automatically inserts a preceding '<code>: </code>' if missing and appends a trailing '<code>;</code>' (semicolon) when completing a QSS value (e.g., completing 'red' after 'color' results in 'color: red;').</li>
+            <li>Improved caret positioning after completion for a smoother workflow.</li>
+        </ul>
+
         <h3>Version 1.0.0</h3>
         <ul>
             <li>Initial release.</li>
             <li>Provides basic syntax highlighting, code completion, and error checking for QSS files.</li>
         </ul>
-    ]]></change-notes>
+        ]]>
+    </change-notes>
 
     <!-- Dependencies -->
     <depends>com.intellij.modules.platform</depends>
