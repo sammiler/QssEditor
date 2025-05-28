@@ -10,7 +10,7 @@ java {
     }
 }
 group = "com.example"
-version = "1.1-SNAPSHOT"
+version = "1.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -45,8 +45,8 @@ intellijPlatform {
 
 
         ideaVersion {
-            sinceBuild = "241" // 或 "243" 根据你的需求
-            untilBuild = "251.*"
+            sinceBuild = "251" // 或 "243" 根据你的需求
+            untilBuild = "252.*"
             // untilBuild = "251.*" // 可省略
         }
     }

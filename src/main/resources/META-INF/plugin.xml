@@ -18,7 +18,7 @@
 
     <!-- Plugin Description - Translated and summarized from README -->
     <description><![CDATA[
-        <h2>QssEditor - Enhancing Qt Style Sheet Development in IntelliJ IDEA</h2>
+        <h2>QssEditor - Enhancing Qt Style Sheet Development </h2>
 
         <p>
             QssEditor is an IntelliJ IDEA plugin designed to improve the development experience for <strong>Qt Style Sheet (QSS)</strong> files.
@@ -58,6 +58,10 @@
     <!-- Change Notes - Describe changes in this version -->
     <change-notes>
         <![CDATA[
+                <h3>Version 1.2.0</h3>
+        <ul>
+            <li><b>Update to 252</b></li>
+        </ul>
         <h3>Version 1.1.0</h3>
         <ul>
             <li><b>Enhanced Code Completion:</b></li>
